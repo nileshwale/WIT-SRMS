@@ -1,0 +1,83 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-title>{{ isEdit ? 'Edit Student' : 'Add Student' }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding student-form-page">
+  <form (ngSubmit)="submitForm()">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Student Details</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-item>
+          <ion-icon name="person-outline" slot="start"></ion-icon>
+          <ion-input placeholder="Name" [(ngModel)]="student.name" name="name" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="document-text-outline" slot="start"></ion-icon>
+          <ion-input placeholder="Roll Number" [(ngModel)]="student.roll" name="roll" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="business-outline" slot="start"></ion-icon>
+          <ion-input placeholder="Department" [(ngModel)]="student.department" name="department" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="calendar-number-outline" slot="start"></ion-icon>
+          <ion-input type="number" placeholder="Year" [(ngModel)]="student.year" name="year" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="pulse-outline" slot="start"></ion-icon>
+          <ion-input type="number" placeholder="Attendance (%)" [(ngModel)]="student.attendance" name="attendance" required></ion-input>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- 🎓 Subjects & Grades -->
+    <ion-card class="subject-card">
+      <ion-card-header>
+        <ion-card-title>Subjects & Grades</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-item *ngFor="let subject of subjects; let i = index">
+          <ion-input
+            [(ngModel)]="subjects[i]"
+            name="subject-{{i}}"
+            placeholder="Subject {{i + 1}}">
+          </ion-input>
+
+          <ion-input
+            [(ngModel)]="grades[i]"
+            name="grade-{{i}}"
+            placeholder="Grade {{i + 1}}"
+            class="ion-margin-start">
+          </ion-input>
+
+          <ion-button fill="clear" color="danger" (click)="removeSubject(i)">
+            <ion-icon name="remove-circle-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+
+        <ion-button
+          expand="block"
+          (click)="addSubject()"
+          color="secondary"
+          [disabled]="subjects.length >= 5">
+          <ion-icon name="add-outline" slot="start"></ion-icon>Add Subject
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Submit Button -->
+    <ion-button expand="block" type="submit" class="submit-btn" color="primary">
+      {{ isEdit ? 'Update Student' : 'Add Student' }}
+    </ion-button>
+  </form>
+</ion-content>

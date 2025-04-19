@@ -1,0 +1,50 @@
+<ion-content fullscreen class="login-background">
+  <div class="login-container">
+    <div class="login-card">
+      <div class="login-header">
+        <div class="logo-container">
+          <ion-icon name="rocket" class="logo-icon"></ion-icon>
+          <h1>SRMS</h1>
+        </div>
+        <h2>Welcome Back</h2>
+        <p>Sign in to access your personalized dashboard</p>
+      </div>
+
+      <form (submit)="login()">
+        <ion-item lines="none" class="input-item">
+          <ion-icon name="mail-outline" slot="start"></ion-icon>
+          <ion-input
+            type="email"
+            [(ngModel)]="email"
+            name="email"
+            placeholder="Email address"
+            required>
+          </ion-input>
+        </ion-item>
+
+        <ion-item lines="none" class="input-item">
+          <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+          <ion-input
+            type="password"
+            [(ngModel)]="password"
+            name="password"
+            placeholder="Password"
+            required>
+          </ion-input>
+          <ion-button fill="clear" slot="end">
+            <ion-icon name="eye-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+
+        <ion-button expand="block" type="submit" class="login-button">
+          <ion-icon name="arrow-forward" slot="end"></ion-icon>
+          Sign In
+        </ion-button>
+      </form>
+
+      <div class="login-footer">
+        <p>Don't have an account? <a routerLink="/auth/register"><strong>Sign up</strong></a></p>
+      </div>
+    </div>
+  </div>
+</ion-content>

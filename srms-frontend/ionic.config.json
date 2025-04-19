@@ -1,0 +1,7 @@
+{
+  "name": "srms-frontend",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

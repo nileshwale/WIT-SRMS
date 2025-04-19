@@ -1,0 +1,71 @@
+.signup-background {
+  --background: #f0f2f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.signup-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.signup-container {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 30px 25px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+.signup-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.signup-subtitle {
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.custom-input {
+  margin-bottom: 18px;
+  --background: #f5f7fa;
+  border-radius: 12px;
+  --padding-start: 10px;
+  --inner-padding-end: 10px;
+  --highlight-color-focused: #667eea;
+
+  ion-icon {
+    color: #667eea;
+    font-size: 18px;
+    margin-right: 8px;
+  }
+
+  ion-input,
+  ion-select {
+    font-size: 15px;
+    --padding-top: 14px;
+    --padding-bottom: 14px;
+  }
+}
+
+.signup-btn {
+  --background: #667eea;
+  --background-activated: #5a6fd1;
+  --border-radius: 12px;
+  --padding-top: 16px;
+  --padding-bottom: 16px;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}

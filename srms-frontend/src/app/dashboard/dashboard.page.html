@@ -1,0 +1,181 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Student Dashboard</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()">
+        <ion-icon name="log-out-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+  <ion-content class="ion-padding dashboard-content">
+
+    <ion-grid>
+      <ion-row>
+  
+        <ion-col size="12" size-md="6" size-lg="3">
+          <ion-card class="dashboard-card">
+            <ion-card-header>
+              <ion-icon name="people-outline" class="card-icon"></ion-icon>
+              <ion-card-title>Total Students</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              {{ totalStudents }}
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+  
+        <ion-col size="12" size-md="6" size-lg="3">
+          <ion-card class="dashboard-card">
+            <ion-card-header>
+              <ion-icon name="stats-chart-outline" class="card-icon"></ion-icon>
+              <ion-card-title>Average Attendance</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              {{ averageAttendance | number:'1.0-2' }}%
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+  
+        <ion-col size="12" size-md="6" size-lg="3">
+          <ion-card class="dashboard-card">
+            <ion-card-header>
+              <ion-icon name="business-outline" class="card-icon"></ion-icon>
+              <ion-card-title>Department Wise</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-list>
+                <ion-item *ngFor="let dept of departmentStats">
+                  {{ dept.name }}: {{ dept.count }}
+                </ion-item>
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+  
+        <ion-col size="12" size-md="6" size-lg="3">
+          <ion-card class="dashboard-card">
+            <ion-card-header>
+              <ion-icon name="school-outline" class="card-icon"></ion-icon>
+              <ion-card-title>Year Wise</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-list>
+                <ion-item *ngFor="let year of yearStats">
+                  Year {{ year.year }}: {{ year.count }}
+                </ion-item>
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+  
+      </ion-row>
+    </ion-grid>
+  
+  
+
+  <!-- 📋 Student Filter Section -->
+  <ion-card class="filter-section">
+    <ion-card-header>
+      <ion-card-title>
+        <ion-icon name="funnel-outline"></ion-icon>
+        Filter Students
+      </ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <!-- 🔍 Search -->
+          <ion-col size="12" size-md="6">
+            <ion-item>
+              <ion-icon name="search-outline" slot="start"></ion-icon>
+              <ion-input
+                [(ngModel)]="searchQuery"
+                placeholder="Search by name or roll"
+                (ionInput)="filterStudents()">
+              </ion-input>
+            </ion-item>
+          </ion-col>
+  
+          <!-- 🏢 Department Filter -->
+          <ion-col size="12" size-md="3">
+            <ion-item>
+              <ion-icon name="business-outline" slot="start"></ion-icon>
+              <ion-select
+                [(ngModel)]="selectedDepartment"
+                placeholder="Select Department"
+                interface="popover"
+                (ionChange)="filterStudents()">
+                <ion-select-option *ngFor="let dept of departments">{{ dept }}</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+  
+          <!-- 🎓 Year Filter -->
+          <ion-col size="12" size-md="3">
+            <ion-item>
+              <ion-icon name="calendar-outline" slot="start"></ion-icon>
+              <ion-select
+                [(ngModel)]="selectedYear"
+                placeholder="Select Year"
+                interface="popover"
+                (ionChange)="filterStudents()">
+                <ion-select-option *ngFor="let y of years">{{ y }}</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+  
+        <!-- Reset Button -->
+        <ion-row>
+          <ion-col size="12" class="ion-text-right">
+            <ion-button fill="clear" color="medium" (click)="resetFilters()">
+              <ion-icon name="refresh-outline" slot="start"></ion-icon>
+              Reset Filters
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- 👩‍🎓 Student List -->
+  <ion-card class="student-list-card">
+    <ion-card-header>
+      <ion-card-title>Student Records</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item class="student-item" *ngFor="let student of filteredStudents">
+          <ion-label>
+            <h2>{{ student.name }} ({{ student.roll }})</h2>
+            <p>{{ student.department }} - Year {{ student.year }}</p>
+            <p>Attendance: {{ student.attendance }}%</p>
+            <p>Subjects: {{ student.subjects?.join(', ') }}</p>
+            <div *ngIf="student.grades">
+              <ion-chip *ngFor="let grade of student.grades | keyvalue" color="tertiary">
+                <ion-label>Grade:{{ grade.key }}: {{ grade.value }}</ion-label>
+              </ion-chip>
+            </div>
+          </ion-label>
+
+          <ion-buttons slot="end" class="action-buttons">
+            <ion-button fill="clear" color="primary" (click)="editStudent(student.id!)">
+              <ion-icon name="create-outline"></ion-icon>
+            </ion-button>
+            <ion-button fill="clear" color="danger" (click)="deleteStudent(student.id!)">
+              <ion-icon name="trash-outline"></ion-icon>
+            </ion-button>
+            <ion-button fill="clear" color="medium" (click)="downloadPDF(student.id!)">
+              <ion-icon name="document-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-item>
+      </ion-list>
+      <ion-button expand="block" routerLink="/students/student-form" color="success">Add Student</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

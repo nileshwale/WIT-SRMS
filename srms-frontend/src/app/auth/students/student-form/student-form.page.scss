@@ -1,0 +1,60 @@
+.student-form-page {
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+  
+    ion-card {
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  
+      ion-card-title {
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--ion-color-primary);
+      }
+  
+      ion-card-content {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+  
+      ion-item {
+        --background: #f9f9f9;
+        border-radius: 8px;
+        --padding-start: 12px;
+        --padding-end: 12px;
+        --inner-padding-end: 8px;
+      }
+  
+      ion-icon {
+        font-size: 20px;
+        color: var(--ion-color-medium);
+      }
+    }
+  
+    .subject-card {
+      margin-top: 12px;
+  
+      ion-item {
+        align-items: center;
+        ion-input {
+          flex: 1;
+          margin-right: 10px;
+        }
+  
+        ion-button {
+          --padding-start: 0;
+        }
+      }
+    }
+  
+    .submit-btn {
+      margin-top: 16px;
+      font-weight: 500;
+      font-size: 16px;
+    }
+  }
+  

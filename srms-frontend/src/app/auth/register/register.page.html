@@ -1,0 +1,32 @@
+<ion-content class="signup-background">
+  <div class="signup-wrapper">
+    <div class="signup-container">
+      <h2 class="signup-title">Welcome!</h2>
+      <p class="signup-subtitle">Create your SRMS account</p>
+
+      <!-- 📧 Email -->
+      <ion-item lines="none" class="custom-input">
+        <ion-icon name="mail-outline" slot="start"></ion-icon>
+        <ion-input placeholder="Email" [(ngModel)]="email" type="email" name="email"></ion-input>
+      </ion-item>
+
+      <!-- 🔒 Password -->
+      <ion-item lines="none" class="custom-input">
+        <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+        <ion-input placeholder="Password" [(ngModel)]="password" type="password" name="password"></ion-input>
+      </ion-item>
+
+      <!-- 🧑 Role -->
+      <ion-item lines="none" class="custom-input">
+        <ion-icon name="people-outline" slot="start"></ion-icon>
+        <ion-select interface="popover" [(ngModel)]="role" name="role" placeholder="Select Role">
+          <ion-select-option value="admin">Admin</ion-select-option>
+          <ion-select-option value="faculty">Faculty</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <!-- 🔘 Register Button -->
+      <ion-button expand="block" class="signup-btn" (click)="register()">Register</ion-button>
+    </div>
+  </div>
+</ion-content>
