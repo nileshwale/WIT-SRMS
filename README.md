@@ -1,5 +1,7 @@
 ## Student Records Management System (SRMS)
 
+video Demo Link - https://drive.google.com/file/d/10Dwiu2lQmz8HCKPWPVv1p2b_3CX167zB/view?usp=sharing
+
 🎓 Student Record Management System (SRMS) A full-stack Student Record Management System built with Angular, Ionic, and Node.js. This app allows administrators and faculty to manage student data including grades, subjects, attendance, and performance analytics via a dashboard.
 
 🧰 Tech Stack
